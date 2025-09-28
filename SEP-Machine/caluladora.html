@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calculadora Monstra do Igor</title>
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="titulo">
+        <h1>SEP Machine</h1>
+        <img src="palmeiras.png" alt="Logo" class="logo-pequena" />
+      </div>
+
+      <div class="input-box">
+        Digite um número:<br />
+        <input type="text" id="input_n1" placeholder="Ex: 1001001010" />
+      </div>
+
+      <div class="botoes">
+        <button onclick="converter('decimal')">Decimal</button>
+        <button onclick="converter('binario')">Binário</button>
+        <button onclick="converter('octal')">Octal</button>
+        <button onclick="converter('hexadecimal')">Hexadecimal</button>
+      </div>
+
+      <div class="resultado">
+        <h2>Resultados:</h2>
+        <p>Decimal: <span id="resultdec"></span></p>
+        <p>Binário: <span id="resultbin"></span></p>
+        <p>Octal: <span id="resultoct"></span></p>
+        <p>Hexadecimal: <span id="resulthex"></span></p>
+      </div>
+       <footer>
+      <p>
+        <span class="link">
+        Projeto desenvolvido por: <br>
+          <a href="https://github.com/igor-fel1x" target="_blank">
+            Igor Alexsandro Felix Cardoso
+          </a></span>
+        – São Paulo Tech School
+      </p>
+    </footer>
+    </div>
+
+    <script>
+      function converter(base) {
+        var valor = document.getElementById("input_n1").value.trim();
+        var decimal;
+
+        /* conta para fazer as conversões entre as bases*/
+
+
+        if (base === "decimal") {
+          decimal = parseInt(valor, 10);
+        } else if (base === "binario") {
+          decimal = parseInt(valor, 2);
+        } else if (base === "octal") {
+          decimal = parseInt(valor, 8);
+        } else if (base === "hexadecimal") {
+          decimal = parseInt(valor, 16);
+        }
+
+        /* algumas regras que deve ter nas conversões, usei o regex e return para fechar a função */
+        if (base === "binario" && !/^[01]+$/.test(valor)) {
+          alert("Não há como usar esse numero em binário! Use apenas 0 e 1.");
+          return;
+        }
+        if (base === "octal" && !/^[0-7]+$/.test(valor)) {
+          alert("Não há como usar esse numero em Octal! Use apenas dígitos de 0 a 7.");
+          return;
+        }
+        if (base === "decimal" && !/^[0-9]+$/.test(valor)) {
+          alert("Não há como usar esse numero em decimal! Use valores entre 0 e 9.");
+          return;
+        }
+          if (base === "hexadecimal" && !/^[0-9A-Fa-f]+$/.test(valor)) {
+          alert("Não há como usar esse numero em binário! Use valores de 0 a 9 e Aa - Ff.");
+          return;
+          }
+      
+        document.getElementById("resultdec").textContent = decimal;
+        document.getElementById("resultbin").textContent = decimal.toString(2);
+        document.getElementById("resultoct").textContent = decimal.toString(8);
+        document.getElementById("resulthex").textContent = decimal.toString(16);
+      }
+    </script>
+  </body>
+</html>
